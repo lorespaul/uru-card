@@ -115,11 +115,6 @@ void setup()
 
     FIDO2::Authenticator::powerUp();
 
-#ifdef ENABLE_WIFI_LOGGER
-    connectToWiFi();
-    startServerTCP();
-#endif
-
 #if defined(FIDO2_TRANSPORT_BLE)
     BLE::init();
 
@@ -131,6 +126,11 @@ void setup()
 #ifdef ENABLE_WIFI_LOGGER
     FIDO2::Transport::USB::Service::setCallback(&sendLogToClientTCP);
 #endif
+#endif
+
+#ifdef ENABLE_WIFI_LOGGER
+    connectToWiFi();
+    startServerTCP();
 #endif
 
     delay(1000);
